@@ -1,17 +1,40 @@
 @startuml
 title 交易系统生单时序图
+
+participant "产品线" as B
+participant "商品服务" as G
+participant "售前服务" as Q
+participant "订单服务" as O
+participant "支付服务" as P
+participant "发货服务" as L
+
 autonumber
-业务方 -> 商品服务: 获取商品
-商品服务 -> 业务方: 商品列表
-业务方 -> 售前服务: 优惠券计算
-售前服务 -> 业务方: 优惠券列表
-业务方 -> 订单服务: 创建订单
-订单服务 -> 支付服务: 创建支付单
-支付服务 -> 订单服务: 完全支付
-订单服务 -> 发货服务: 创建发货单
-发货服务 -> 业务方: 通知发货
-业务方 -> 发货服务: 发货结果，变更发货单状态
-发货服务 -> 订单服务: 变更订单发货状态，订单完结
-订单服务 -> 支付服务: 订单完结
-订单服务 -> 业务方: 订单完结
+activate B
+activate G
+B -> G: 获取商品列表和详情
+G -> B: 商品列表/详情
+deactivate G
+activate Q
+B -> Q: 优惠券计算
+Q -> B: 优惠券列表
+deactivate Q
+activate O
+B -> O: 创建订单
+activate P
+O -> P: MQ通知，创建支付单
+P -> O: 完全支付
+deactivate P
+activate L
+O -> L: 创建发货单
+deactivate O
+L -> B: 通知发货
+B -> L: 发货结果，变更发货单状态
+activate O
+L -> O: 变更订单发货状态，订单完结
+deactivate L
+activate P
+O -> P: 订单完结
+deactivate P
+O -> B: 订单完结
+deactivate O
 @enduml
