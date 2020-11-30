@@ -1,4 +1,8 @@
 @startuml
+!include ../c4/core.puml
+
+GREEN_ARROW
+
 package new对象的过程
 start
 - new对象

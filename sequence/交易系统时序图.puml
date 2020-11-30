@@ -1,4 +1,7 @@
 @startuml
+
+!include ../c4/core.puml
+
 title 交易系统生单时序图
 
 participant "产品线" as B

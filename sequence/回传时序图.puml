@@ -1,5 +1,5 @@
 @startuml
-!include e:/C4-PlantUML/C4_Container.puml
+!include ../c4/core.puml
 
 title API回传
 广告平台 -> 广告平台媒体: 曝光
