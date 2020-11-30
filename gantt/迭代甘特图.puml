@@ -1,0 +1,18 @@
+@startgantt
+
+[原型设计] lasts 10 days
+[开发] lasts 15 days
+[测试] lasts 5 days
+[原型评审] lasts 2 days
+[技术评审] lasts 2 days
+[测试用例评审] lasts 2 days
+
+Project starts 2020-12-01
+[原型设计] starts 2020-12-01
+[开发] starts 2020-12-11
+[测试] starts 2020-12-26
+[原型评审] starts 2020-12-09
+[技术评审] starts 2020-12-11
+[测试用例评审] starts 2020-12-22
+
+@endgantt

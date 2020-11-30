@@ -1,0 +1,20 @@
+@startuml
+package new对象的过程
+start
+- new对象
+if (是否类加载) then (是)
+  :分配内存空间;
+  - 实例变量赋默认值
+  - 设置对象头
+  - 执行初始化方法
+else (否)
+  :类加载;
+  - 验证
+  - 准备
+  - 解析
+  - 初始化
+endif
+
+
+stop
+@enduml

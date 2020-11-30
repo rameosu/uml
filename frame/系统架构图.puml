@@ -1,0 +1,107 @@
+@startuml "系统架构"
+!include ../c4/C4_Container.puml
+
+'LAYOUT_TOP_DOWN
+LAYOUT_LEFT_RIGHT
+'LAYOUT_AS_SKETCH()
+LAYOUT_WITH_LEGEND()
+
+title 系统架构
+
+System_Boundary(c1, "访问层"){
+    Person(web, "Web")
+    Person(app, "APP")
+    Person(h5, "H5")
+    Person(mini, "小程序")
+}
+System_Boundary(c2, "网络层"){
+    Container(cdn, "CDN", "内容分发")
+    Container(dns, "DNS", "域名解析")
+    Container(elb, "ELB", "华为云负载均衡")
+}
+System_Boundary(c3, "网关层"){
+    Container(zuul, "Zuul", "鉴权/认证/路由/限流/负载均衡")
+    Container(gateway, "Gateway", "鉴权/认证/路由/限流/负载均衡")
+}
+System_Boundary(c4, "应用层"){
+    Container(qlds, "应用服务1", "应用服务/接口")
+    Container(sjgj, "应用服务2", "应用服务/接口")
+    Container(xcds, "应用服务3", "应用服务/接口")
+    Container(qt, "其他", "应用服务/接口")
+}
+System_Boundary(c5, "服务层"){
+    System_Boundary(c6, "子服务"){
+        Container(wfw1, "微服务1", "Feign接口")
+        Container(wfw2, "微服务2", "Feign接口")
+        Container(wfw3, "微服务3", "Feign接口")
+        Container(wfw4, "其他", "Feign接口")
+    }
+
+    System_Boundary(c7, "组合服务"){
+        Container(zhfw1, "组合服务1", "Feign接口")
+        Container(zhfw2, "组合服务2", "Feign接口")
+        Container(zhfw3, "组合服务3", "Feign接口")
+        Container(zhfw4, "组合服务4", "Feign接口")
+    }
+}
+System_Boundary(c8, "公共技术层"){
+    Container(msc, "消息推送中心", "Message Send Center")
+    Container(mq, "消息队列", "RabbitMQ")
+    Container(job, "分布式任务调度", "ElasticJob/Xxl-Job")
+    Container(redis, "分布式缓存", "Redis")
+    Container(oic, "运行指标采集", "Operation Index Collection")
+    Container(bs, "基础服务", "Basic Service")
+}
+System_Boundary(c9, "基础设施层"){
+    Container(esc, "云服务器", "ESC")
+    Container(kubernetes, "容器编排", "K8S")
+    Container(rabbitCluster, "RabbitMQ集群", "RabbitMQ Cluster")
+    Container(redisCluster, "Redis集群", "Redis Cluster")
+    Container(pika, "Pika集群", "Pika Cluster")
+    Container(mongo, "MongoDB集群", "MongoDB Cluster")
+    Container(mysql, "Mysql集群", "Mysql Cluster")
+    Container(sqlServer, "SqlServer集群", "SqlServer Cluster")
+    Container(elasticSearch, "ElasticSearch集群", "ElasticSearch Cluster")
+    Container(zookeeper, "Zookeeper集群", "Zookeeper Cluster")
+}
+
+System_Boundary(w1, "服务治理"){
+    System_Ext(eureka, "Eureka")
+    System_Ext(apollo, "Apollo")
+    System_Ext(skywalking, "Skywalking")
+    System_Ext(sentinel, "Sentinel")
+}
+System_Boundary(w2, "系统监控"){
+    System_Ext(elk, "ELK")
+    System_Ext(prometheus, "Prometheus")
+    System_Ext(zabbix, "Zabbix")
+    System_Ext(warning, "短信/电话/飞书/邮件告警")
+}
+System_Boundary(w3, "DevOps"){
+    System_Ext(gitlab, "GitLab")
+    System_Ext(jenkins, "Jenkins")
+    System_Ext(ansible, "Ansible")
+    System_Ext(zdhcs, "自动化测试")
+    System_Ext(docker, "Docker")
+    System_Ext(k8s, "K8S")
+}
+
+Rel(c1, c2, "请求")
+Rel(c2, c3, "请求")
+Rel(c3, c4, "请求")
+Rel(c4, c5, "请求")
+Rel(c6, c7, "服务间通信")
+Rel(c7, c6, "服务间通信")
+Rel(c5, c8, "请求")
+Rel(c8, c9, "请求")
+
+'Rel(c3, w1, "收集数据")
+'Rel(c4, w1, "收集数据")
+'Rel(c5, w1, "收集数据")
+'Rel(c3, w2, "收集数据")
+'Rel(c4, w2, "收集数据")
+'Rel(c5, w2, "收集数据")
+
+
+
+@enduml

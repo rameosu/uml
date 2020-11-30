@@ -1,0 +1,10 @@
+@startuml
+!include e:/C4-PlantUML/C4_Container.puml
+
+title API回传
+广告平台 -> 广告平台媒体: 曝光
+广告平台媒体 -> APP: 点击下载（安装启动）
+广告平台媒体 -> 安狗狗后台: 点击下载（发送点击数据）
+APP -> 安狗狗后台: 上报激活
+安狗狗后台 -> 广告平台: API回传
+@enduml
