@@ -1,0 +1,27 @@
+@startmindmap
+<style>
+mindmapDiagram {
+    node {
+        BackgroundColor #lightGreen
+    }
+    :depth(1) {
+      BackGroundColor lightBlue
+    }
+    :depth(2) {
+      BackGroundColor lightBlue
+    }
+}
+</style>
+
+* Effective Java
+** 考虑使用静态工厂方法替代构造方法
+** 当构造方法参数太多时使用 Builder 模式
+** 使用私有构造方法或枚举类实现 Singleton 属性
+** 使用私有构造器执行非实例化
+** 依赖注入优于硬连接资源
+** 避免创建不必要的对象
+** 消除过期的对象引用
+** 避免使用 Finalizer 和 Cleaner 机制
+** 使用 try-with-resources 语句替代 try-finally 语句
+** 重写 equals 方法时遵守通用约定
+@endmindmap

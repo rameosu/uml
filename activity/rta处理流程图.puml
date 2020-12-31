@@ -1,0 +1,34 @@
+@startuml
+
+!include ../c4/core.puml
+
+start
+
+ : 腾讯RTA;
+ : rta-controller;
+
+if (是否存在设备信息) then (是)
+    if (是否配置策略) then (是)
+        if (匹配设备信息) then (有)
+            if (所有策略) then (未竟策略)
+                : 执行新用户策略分支;
+                : 从未参竟的策略中找到
+                策略类型为新用户的参与竞价;
+            else (已竟策略)
+                : 执行老用户策略分支;
+                : 从已竟策略中找到
+                策略类型为老用户的参与竞价;
+            endif
+        else (无)
+            : 参竞所有新用户策略;
+        endif
+    else (否)
+        : 参竞所有策略;
+    endif
+else (否)
+    : 过滤该流量;
+endif
+
+stop
+
+@enduml
