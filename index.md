@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+### 初衷
 
-You can use the [editor on GitHub](https://github.com/rameosu/uml/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+- 开发者在实际开发过程中，往往会省略画图例的过程。
+- 作者身边认识的开发者中会使用专业的工具画图的寥寥，大部分是对基本的图例知识都知之甚少。
+- 作者再接触到PlantUml画图插件后，逐渐抛弃了各类专业画图工具，无论是类图、流程图、时序图、用例图、组件图、部署图、对象图、状态图、脑图、甘特图、工作分解图其都能胜任
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### 为什么要用PlantUml
 
-### Markdown
+- 作为插件集成到各类开发工具，如IDEA\Eclipse\Vscode
+- 用写代码的方式实现，更符合开发者的习惯，效率更高
+- 支持大部分常见类型的图，免去了不少工具的安装
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### PlantUml资源汇总
 
-```markdown
-Syntax highlighted code block
+- 官网：https://plantuml.com/zh/
+- 在线编辑：https://www.planttext.com/
+- https://github.com/plantuml/plantuml
+- https://real-world-plantuml.com/
 
-# Header 1
-## Header 2
-### Header 3
+### 集成C4 Model
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rameosu/uml/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+- https://github.com/plantuml-stdlib/C4-PlantUML
+- https://www.cnblogs.com/xuanye/p/new-style-4-plantuml-and-c4model.html
