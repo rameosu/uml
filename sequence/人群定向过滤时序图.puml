@@ -1,0 +1,50 @@
+@startuml
+!include ../c4/core.puml
+
+title 神策（无点击用户）
+定时作业平台 -> 回传服务: 触发定时作业
+回传服务 -> 神策: 调用查询API
+神策 -> 回传服务: 返回数据
+回传服务 -> pika: 更新数据
+@enduml
+
+@startuml
+!include ../c4/core.puml
+
+title 反作弊
+定时作业平台 -> 回传服务: 触发定时作业
+回传服务 -> python脚本: 执行python脚本
+python脚本 -> mysql: 更新数据
+mysql -> pika: 同步数据
+@enduml
+
+@startuml
+!include ../c4/core.puml
+
+GREEN_ARROW
+
+package 回传流程
+start
+- 用户激活的MQ消息
+- 归因匹配成功
+if (激活回传条件为：用户激活) then (是)
+    if (命中作弊用户规则或有活跃无点击规则) then (是)
+        : 记录回传数据;
+    else (否)
+        : 上报广告平台;
+        : 记录回传数据;
+    endif
+else (否)
+    if (激活回传条件为：激活+点击且匹配成功) then (否)
+        : 记录回传数据;
+    else (是)
+        if (命中作弊用户规则或有活跃无点击规则) then (是)
+            : 记录回传数据;
+        else (否)
+            : 上报广告平台;
+            : 记录回传数据;
+        endif
+    endif
+endif
+stop
+@enduml

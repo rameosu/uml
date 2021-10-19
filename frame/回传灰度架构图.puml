@@ -1,0 +1,31 @@
+@startuml "回传灰度架构"
+!include ../c4/C4_Container.puml
+
+'LAYOUT_TOP_DOWN
+'LAYOUT_LEFT_RIGHT
+'LAYOUT_AS_SKETCH()
+LAYOUT_WITH_LEGEND()
+
+title 回传灰度
+
+Person_Ext(apollo, "device-feedback-filter Apollo")
+System_Ext(jenkins, "feedback-match Jenkins")
+Container(mq, "RabbitMQ","灰度队列")
+System(device, "device-feedback-filter")
+System(gray, "feedback-match-gray")
+Person_Ext(gray_apollo, "feedback-match-gray Apollo")
+
+Rel(apollo, device, "渠道类型的灰度规则/平台类型的灰度规则")
+Rel(jenkins, gray, "master分支最新版本")
+Rel(gray_apollo, gray, "打标为灰度")
+Rel(device, mq, "命中灰度规则的设备")
+Rel(mq, gray, "消费灰度队列")
+
+System_Boundary(w3, "灰度成功"){
+    System_Ext(A, "feedback-match Jenkins")
+    System(B, "feedback-match")
+}
+
+Rel(A, B, "master分支最新版本")
+
+@enduml
